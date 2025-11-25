@@ -1,0 +1,307 @@
+/* ==================== ANIMATED NAVBAR INDICATOR ==================== */
+.nav-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+  border-radius: 3px 3px 0 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 10px var(--glow);
+  z-index: 1;
+}
+
+.nav-active {
+  color: var(--accent) !important;
+  font-weight: 600 !important;
+}
+
+/* ==================== SKILL IMPACT BADGES ==================== */
+.skill-badges {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+  animation: badge-slide-in 0.5s ease-out;
+}
+
+@keyframes badge-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.skill-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  border-radius: 12px;
+  font-size: 11px;
+  color: var(--accent);
+  transition: all 0.3s ease;
+  cursor: help;
+  position: relative;
+}
+
+.skill-badge:hover {
+  background: rgba(6, 182, 212, 0.2);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px var(--glow);
+}
+
+.skill-badge svg {
+  width: 14px;
+  height: 14px;
+  stroke-width: 2.5;
+}
+
+.skill-badge::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px var(--shadow);
+  border: 1px solid var(--accent);
+  opacity: 0;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.skill-badge::after {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid var(--accent);
+  opacity: 0;
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skill-badge:hover::before {
+  transform: translateX(-50%) scale(1);
+  opacity: 1;
+}
+
+.skill-badge:hover::after {
+  opacity: 1;
+}
+
+/* ==================== MICRO-ANIMATIONS ==================== */
+.micro-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.micro-hover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at center, var(--glow), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.micro-hover:hover::before {
+  opacity: 1;
+}
+
+.micro-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--shadow);
+}
+
+.micro-hover:active {
+  transform: translateY(0);
+}
+
+/* Pulse Glow Effect */
+.pulse-glow {
+  animation: pulse-glow-effect 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow-effect {
+  0%, 100% {
+    box-shadow: 0 0 10px var(--glow);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--glow), 0 0 30px var(--glow);
+  }
+}
+
+/* Icon Rotation */
+.icon-rotate {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*:hover > .icon-rotate {
+  transform: rotate(360deg) scale(1.1);
+}
+
+/* Card Lift Effect */
+.card-lift {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.card-lift::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--glow), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.card-lift:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px var(--shadow), 0 0 40px var(--glow);
+}
+
+.card-lift:hover::after {
+  opacity: 0.5;
+}
+
+/* ==================== SCROLL REVEAL ANIMATIONS ==================== */
+.reveal-element {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-element.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger animation for multiple elements */
+.reveal-element:nth-child(1) { transition-delay: 0.1s; }
+.reveal-element:nth-child(2) { transition-delay: 0.2s; }
+.reveal-element:nth-child(3) { transition-delay: 0.3s; }
+.reveal-element:nth-child(4) { transition-delay: 0.4s; }
+.reveal-element:nth-child(5) { transition-delay: 0.5s; }
+.reveal-element:nth-child(6) { transition-delay: 0.6s; }
+
+/* ==================== SMOOTH TRANSITIONS ==================== */
+.smooth-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Scale Effect */
+.scale-hover:hover {
+  transform: scale(1.05);
+}
+
+/* Slide Effect */
+.slide-in-left {
+  animation: slide-in-left 0.6s ease-out;
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide-in-right {
+  animation: slide-in-right 0.6s ease-out;
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ==================== BUTTON ENHANCEMENTS ==================== */
+button, a[href] {
+  position: relative;
+  overflow: hidden;
+}
+
+button::after, a[href]::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+button:active::after, a[href]:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* ==================== RESPONSIVE ADJUSTMENTS ==================== */
+@media (max-width: 768px) {
+  .theme-toggle {
+    top: 15px;
+    right: 15px;
+  }
+
+  #theme-toggle-btn {
+    width: 45px;
+    height: 45px;
+  }
+
+  .skill-badges {
+    gap: 6px;
+  }
+
+  .skill-badge {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+}
+
+/* ==================== PERFORMANCE OPTIMIZATIONS ==================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
